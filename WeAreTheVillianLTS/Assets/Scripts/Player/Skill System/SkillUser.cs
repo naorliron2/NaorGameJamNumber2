@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SkillUser : MonoBehaviour
 {
-    
-    UtillitySkill UtilitySkill;
-    [SerializeField] AttackSkill AttackSkill;
+
+    public UtillitySkill UtilitySkill;
+    public AttackSkill AttackSkill;
 
     UtillitySkill[] UtilitySkills;
     [SerializeField] AttackSkill[] AttackSkills;
