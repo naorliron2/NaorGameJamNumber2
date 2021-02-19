@@ -5,4 +5,8 @@ using UnityEngine;
 public class UtillitySkill : BaseSkill
 {
 
+    public override void UseSkill()
+    {
+        base.UseSkill();
+    }
 }

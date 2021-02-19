@@ -4,41 +4,36 @@ using UnityEngine;
 
 public class SkillUser : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public UtillitySkill UtilitySkill;
-    public AttackSkill AttackSkill;
+    
+    UtillitySkill UtilitySkill;
+    [SerializeField] AttackSkill AttackSkill;
 
     UtillitySkill[] UtilitySkills;
-    AttackSkill[] AttackSkills;
+    [SerializeField] AttackSkill[] AttackSkills;
 
 
     void Start()
     {
         UtilitySkills = GetComponents<UtillitySkill>();
         AttackSkills = GetComponents<AttackSkill>();
-        Debug.Log(Random.Range(0, AttackSkills.Length));
 
-    }
-
-    public void ChooseSkills()
-    {
         AttackSkill = AttackSkills[Random.Range(0, AttackSkills.Length)];
         UtilitySkill = UtilitySkills[Random.Range(0, UtilitySkills.Length)];
+
+        Debug.Log(Random.Range(0, AttackSkills.Length));
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
-            if (AttackSkill != null)
-                AttackSkill.UseSkill();
+            AttackSkill.UseSkill();
         }
-        if (Input.GetMouseButtonDown(2))
+        if (Input.GetMouseButtonDown(1))
         {
-            if (UtilitySkill != null)
-                UtilitySkill.UseSkill();
+            UtilitySkill.UseSkill();
         }
     }
 }

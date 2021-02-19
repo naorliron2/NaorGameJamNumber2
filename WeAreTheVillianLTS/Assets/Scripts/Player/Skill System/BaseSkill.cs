@@ -6,20 +6,16 @@ public abstract class BaseSkill : MonoBehaviour
 {
     public SkillSettings settings;
 
-    float coolDownCounter;
+    [SerializeField]protected float coolDownCounter = 0;
     public virtual void UseSkill()
     {
-        if (coolDownCounter <= 0)
-        {
-            Debug.Log("Skill On CoolDown!");
-            coolDownCounter = settings.CoolDown;
-        }
+        if (coolDownCounter > 0) return;
+        coolDownCounter = settings.CoolDown;
     }
     private void Update()
     {
-        if (coolDownCounter > 0)
-        {
-            coolDownCounter -= Time.deltaTime;
-        }
+
+        coolDownCounter -= Time.deltaTime;
+
     }
 }

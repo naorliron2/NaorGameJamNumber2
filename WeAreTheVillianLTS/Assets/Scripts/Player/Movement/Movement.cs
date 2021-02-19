@@ -46,6 +46,11 @@ public class Movement : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    public void ResetVelocity()
+    {
+        velocity = Vector3.zero;
+    }
     void Update()
     {
         currentFrameInputs = GetInputs();

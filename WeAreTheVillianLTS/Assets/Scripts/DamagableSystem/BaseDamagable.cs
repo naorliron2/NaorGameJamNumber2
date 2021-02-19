@@ -8,6 +8,7 @@ public abstract class BaseDamagable : MonoBehaviour
     public int maxHealth = 100;
     public virtual void TakeDamage(int amount)
     {
+        Debug.Log("Take Damage");
         if (amount <= 0) return;
         health -= amount;
         if (health < 0)

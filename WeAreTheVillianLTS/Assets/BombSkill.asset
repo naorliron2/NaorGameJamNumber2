@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 872eeca0ed8b97b41ba44b0408adee85, type: 3}
-  m_Name: Test
+  m_Name: BombSkill
   m_EditorClassIdentifier: 
-  CoolDown: 10
-  skillName: nice
+  CoolDown: 0
+  skillName: BomberMan
