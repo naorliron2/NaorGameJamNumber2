@@ -16,12 +16,12 @@ public class Movement : MonoBehaviour
 
     Vector2 velocity;
     [SerializeField] bool grounded = true;
-    [SerializeField] bool attacking = false;
+    [SerializeField] public bool attacking = false;
     bool pointsRight = false;
 
     InputData currentFrameInputs;
 
-
+    public static bool PlayerIsFlipped;
     struct InputData
     {
         public Vector2 inputDir;
@@ -111,6 +111,26 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void Dash(float dashDistance,float dashTime)
+    {
+        Vector2 dashVector = currentFrameInputs.inputDir.x* dashDistance * Vector2.right;
+        StartCoroutine(DashCorutine(dashVector, dashTime));
+    }
+
+    IEnumerator DashCorutine(Vector2 dashVector, float dashTime)
+    {
+        float timer = dashTime;
+        Vector2 smoothDampVelocity = Vector2.zero;
+        Vector2 destination = rb.position + dashVector;
+        while (timer>=0)
+        {
+            ResetVelocity(); //??? THIS IS SO UGLY AND BUGGY ???
+            rb.position = Vector2.SmoothDamp(rb.position, destination, ref smoothDampVelocity, dashTime);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+    }
+
     private void HandleAnimations()
     {
         _animator.SetBool("Jump", false);
@@ -121,6 +141,7 @@ public class Movement : MonoBehaviour
             //TODO: MAKE SURE THE TRIGGER HAPPENS ONLY ONCE PER ATTACK
             //DASH FROWARD ONLY HAPPENS AFTER THE WINDUP FRAMES
             _animator.SetTrigger("Attack");
+            attacking = false;
         }
         else
         {
@@ -146,6 +167,7 @@ public class Movement : MonoBehaviour
             pointsRight = false;
         }
         _sprite.flipX = pointsRight;
+        PlayerIsFlipped = _sprite.flipX;
 
     }
 }

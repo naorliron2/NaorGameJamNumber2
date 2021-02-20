@@ -33,11 +33,11 @@ public class CannibalizeSkill : UtillitySkill
         if (amountToMegaChompCounter < amountToMegaChomp || (enraged &&enragedBiteCooldownTimer<=0)) //THIS IS SO UGLY
         {
             enragedBiteCooldownTimer = enragedBiteCooldown;
-            Debug.Log("CHOMP");
-            hit = Physics2D.CircleCast(transform.position, radius, transform.right, range, enemyMask.layerMask);
+
+            hit = Physics2D.CircleCast(transform.position, radius, Movement.PlayerIsFlipped ? transform.right : -transform.right, range, enemyMask.layerMask);
             if (hit.collider != null)
             {
-                Debug.Log("hit");
+
 
                 if (hit.collider.gameObject.GetComponent<BaseDamagable>().isDead)
                 {
@@ -57,7 +57,7 @@ public class CannibalizeSkill : UtillitySkill
         if (hit.collider != null)
         {
 
-            hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(megaChompDmg);
+            hit.collider.gameObject.GetComponent<BaseDamagable>().TakeDamage(megaChompDmg);
             healthManager.Heal(amountToHeal);
         }
     }

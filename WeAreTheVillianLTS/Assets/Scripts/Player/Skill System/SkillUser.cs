@@ -9,7 +9,7 @@ public class SkillUser : MonoBehaviour
     public AttackSkill AttackSkill;
 
     UtillitySkill[] UtilitySkills;
-     AttackSkill[] AttackSkills;
+    AttackSkill[] AttackSkills;
 
 
     void Start()
@@ -31,11 +31,11 @@ public class SkillUser : MonoBehaviour
     void Update()
     {
         if (!Playbutton.GameStarted) { return; }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             AttackSkill.UseSkill();
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             UtilitySkill.UseSkill();
         }

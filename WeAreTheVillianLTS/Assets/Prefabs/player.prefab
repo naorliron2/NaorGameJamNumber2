@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 1571838837}
   - component: {fileID: 1571838827}
   - component: {fileID: 1571838828}
+  - component: {fileID: 1153408918}
   m_Layer: 9
   m_Name: player
   m_TagString: Player
@@ -227,6 +228,7 @@ MonoBehaviour:
   jumpForce: 5
   gravity: -10
   grounded: 1
+  attacking: 0
 --- !u!114 &1170427690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +442,7 @@ MonoBehaviour:
   skillName: Cannibalism
   coolDownCounter: 0
   amountToMegaChomp: 5
-  radius: 1
+  radius: 0.1
   range: 1
   enemyMask:
     useTriggers: 0
@@ -487,6 +489,26 @@ MonoBehaviour:
   eyesPos: {fileID: 1951414471}
   lineRenderer: {fileID: 1571838837}
   laserStayontime: 0.1
+--- !u!114 &1153408918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7094329007594642956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4425d6aa3d23c9347bb3d1afec14bc6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.1
+  range: 1
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  damage: 50
+  cooldownTime: 1.2
+  cooldownTimer: 0
 --- !u!1 &8699195939321477108
 GameObject:
   m_ObjectHideFlags: 0

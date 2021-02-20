@@ -25,6 +25,8 @@ public class SlimeMoveScript : MonoBehaviour
         sightChecker = GetComponent<SlimeSightChecker>();
         myDamagable = GetComponent<BaseDamagable>();
         myRenderer = GetComponentInChildren<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        player = FindObjectOfType<PlayerHealth>().transform;
     }
 
     private void CheckGrounded()

@@ -11,7 +11,7 @@ public class SlimeSightChecker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        player = FindObjectOfType<PlayerHealth>().transform;
     }
 
     // Update is called once per frame
