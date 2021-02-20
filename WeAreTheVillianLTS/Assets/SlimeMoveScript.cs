@@ -11,32 +11,62 @@ public class SlimeMoveScript : MonoBehaviour
     [SerializeField] float minJumpForce;
     [SerializeField] float maxJumpForce;
     [SerializeField] int maxMissedIntervals;
+    [SerializeField] BaseDamagable myDamagable;
+    [SerializeField] SpriteRenderer myRenderer;
+    [SerializeField] LayerMask groundCheckMask;
+    [SerializeField] SlimeSightChecker sightChecker;
     int timesNotJumped;
     float tryMoveTimer;
+    bool grounded;
     // Start is called before the first frame update
     void Start()
     {
         tryMoveTimer = tryMoveTime;
+        sightChecker = GetComponent<SlimeSightChecker>();
+        myDamagable = GetComponent<BaseDamagable>();
+        myRenderer = GetComponentInChildren<SpriteRenderer>();
     }
-
+    
+    private void CheckGrounded()
+    {
+        RaycastHit2D hit;
+        if (hit = Physics2D.Raycast(transform.position, -Vector2.up, 0.1f, groundCheckMask))
+        {
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        if (tryMoveTimer > 0)
+        CheckGrounded();
+        Debug.Log(sightChecker.PlayerInSight);
+        if (!myDamagable.isDead && grounded && sightChecker.PlayerInSight)
         {
-            tryMoveTimer -= Time.deltaTime;
-        }
-        if (tryMoveTimer <= 0)
-        {
-            tryMoveTimer = tryMoveTime;
-            int rand = Random.Range(0, 100);
-            if (rand > tryMoveChance || timesNotJumped > maxMissedIntervals)
+            if (tryMoveTimer > 0)
             {
-                rb.AddForce(((player.position - transform.position).normalized + Vector3.up) * Random.Range((int)minJumpForce, (int)maxJumpForce), ForceMode2D.Impulse);
+                tryMoveTimer -= Time.deltaTime;
             }
-            else
+            if (tryMoveTimer <= 0)
             {
-                timesNotJumped++;
+                tryMoveTimer = tryMoveTime;
+                int rand = Random.Range(0, 100);
+                if (rand > tryMoveChance || timesNotJumped > maxMissedIntervals)
+                {
+                    Vector3 dir = (player.position - transform.position).normalized;
+
+
+                    myRenderer.flipX = dir.x > 0;
+
+                    rb.AddForce((dir + Vector3.up) * Random.Range((int)minJumpForce, (int)maxJumpForce), ForceMode2D.Impulse);
+                }
+                else
+                {
+                    timesNotJumped++;
+                }
             }
         }
     }
