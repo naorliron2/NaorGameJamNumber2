@@ -6,7 +6,7 @@ public class PlayerHealth : BaseDamagable
 {
     protected override void Die()
     {
-        throw new System.NotImplementedException();
+        isDead = true;
     }
     public override void TakeDamage(int amount)
     {
