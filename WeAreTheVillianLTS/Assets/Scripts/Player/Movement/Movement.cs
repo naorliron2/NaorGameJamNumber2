@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float gravity;
 
     Vector2 velocity;
-    bool grounded = true;
+    [SerializeField] bool grounded = true;
     bool pointsRight = false;
 
     InputData currentFrameInputs;
@@ -34,7 +34,7 @@ public class Movement : MonoBehaviour
         InputData inputs;
         inputs.inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputs.space = Input.GetButtonDown("Jump");
-        inputs.shift = Input.GetKeyDown(KeyCode.LeftShift);
+        inputs.shift = Input.GetKey(KeyCode.LeftShift);
 
         return inputs;
     }
@@ -58,21 +58,41 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        CheckGrounded();
+        
 
         currentFrameInputs = GetInputs();
+
+        CheckGrounded();
 
         float speed = currentFrameInputs.shift ? runSpeed : walkSpeed;
         speed *= currentFrameInputs.inputDir.x;
         velocity.x = speed;
 
+        if (grounded)
+        {
+            
+            if (currentFrameInputs.space)
+            {
+                velocity.y = jumpForce;
+            }
+            else
+            {
+                if(velocity.y<=0)
+                velocity.y = 0;
+            }
+        }
+        else
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
+            
+        
 
-        velocity.y = (currentFrameInputs.space && grounded) ? jumpForce : velocity.y;
+       
 
-        velocity.y += gravity * Time.deltaTime;
 
         rb.velocity = velocity;
-
+        
         HandleAnimations();
         HandleFlip();
     }
