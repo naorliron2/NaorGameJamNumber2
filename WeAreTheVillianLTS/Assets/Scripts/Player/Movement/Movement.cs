@@ -16,6 +16,7 @@ public class Movement : MonoBehaviour
 
     Vector2 velocity;
     [SerializeField] bool grounded = true;
+    [SerializeField] bool attacking = false;
     bool pointsRight = false;
 
     InputData currentFrameInputs;
@@ -58,7 +59,7 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        
+
 
         currentFrameInputs = GetInputs();
 
@@ -70,29 +71,29 @@ public class Movement : MonoBehaviour
 
         if (grounded)
         {
-            
+
             if (currentFrameInputs.space)
             {
                 velocity.y = jumpForce;
             }
             else
             {
-                if(velocity.y<=0)
-                velocity.y = 0;
+                if (velocity.y <= 0)
+                    velocity.y = 0;
             }
         }
         else
         {
             velocity.y += gravity * Time.deltaTime;
         }
-            
-        
 
-       
+
+
+
 
 
         rb.velocity = velocity;
-        
+
         HandleAnimations();
         HandleFlip();
     }
@@ -102,30 +103,35 @@ public class Movement : MonoBehaviour
         RaycastHit2D hit;
         if (hit = Physics2D.Raycast(transform.position, -Vector2.up, 0.1f, groundCheckMask))
         {
-            grounded = true;           
+            grounded = true;
         }
         else
         {
-             grounded = false;
+            grounded = false;
         }
     }
 
     private void HandleAnimations()
     {
-        if (grounded == false)
+        _animator.SetBool("Jump", false);
+        _animator.SetBool("Walk", false);
+
+        if (attacking == true)
         {
-            _animator.SetBool("Jump", true);
-            _animator.SetBool("Walk", false);
-        }
-        else if (velocity.x > 0.1f || velocity.x < -0.1f)
-        {
-            _animator.SetBool("Jump", false);
-            _animator.SetBool("Walk", true);
+            //TODO: MAKE SURE THE TRIGGER HAPPENS ONLY ONCE PER ATTACK
+            //DASH FROWARD ONLY HAPPENS AFTER THE WINDUP FRAMES
+            _animator.SetTrigger("Attack");
         }
         else
         {
-            _animator.SetBool("Jump", false);
-            _animator.SetBool("Walk", false);
+            if (grounded == false)
+            {
+                _animator.SetBool("Jump", true);
+            }
+            else if (velocity.x > 0.1f || velocity.x < -0.1f)
+            {
+                _animator.SetBool("Walk", true);
+            }
         }
     }
 
