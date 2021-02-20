@@ -7,7 +7,7 @@ public abstract class BaseSkill : MonoBehaviour
     public float CoolDown;
     public string skillName;
 
-    protected float coolDownCounter = 0;
+    public float coolDownCounter = 0;
     public virtual void UseSkill()
     {
         if (coolDownCounter > 0) return;

@@ -9,7 +9,7 @@ public class SkillUser : MonoBehaviour
     public AttackSkill AttackSkill;
 
     UtillitySkill[] UtilitySkills;
-    [SerializeField] AttackSkill[] AttackSkills;
+     AttackSkill[] AttackSkills;
 
 
     void Start()

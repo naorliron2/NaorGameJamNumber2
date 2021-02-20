@@ -20,6 +20,8 @@ public class LaserEyesSkill : AttackSkill
     }
     private void Update()
     {
+        coolDownCounter -= Time.deltaTime;
+
         if (lineRenderer.enabled == true)
         {
             laserStayontimer -= Time.deltaTime;
@@ -27,6 +29,7 @@ public class LaserEyesSkill : AttackSkill
         if (laserStayontimer <= 0)
         {
             lineRenderer.enabled = false;
+
         }
     }
     public override void UseSkill()
@@ -42,11 +45,11 @@ public class LaserEyesSkill : AttackSkill
         laserStayontimer = laserStayontime;
         lineRenderer.enabled = true;
         lineRenderer.SetPosition(0, eyesPos.position);
-        lineRenderer.SetPosition(1, hit.collider != null ? new Vector3( hit.point.x,hit.point.y,0) : (mousePos - eyesPos.position).normalized * laserRange);
+        lineRenderer.SetPosition(1, hit.collider != null ? new Vector3(hit.point.x, hit.point.y, 0) : (mousePos - eyesPos.position).normalized * laserRange);
 
         if (hit.collider != null)
         {
-            if(hit.collider.TryGetComponent<BaseDamagable>(out BaseDamagable toDmg))
+            if (hit.collider.TryGetComponent<BaseDamagable>(out BaseDamagable toDmg))
             {
                 toDmg.TakeDamage(laserDmg);
             }
