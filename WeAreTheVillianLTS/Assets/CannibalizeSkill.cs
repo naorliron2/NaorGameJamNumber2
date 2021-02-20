@@ -28,7 +28,7 @@ public class CannibalizeSkill : UtillitySkill
     public override void UseSkill()
     {
         if (coolDownCounter > 0 && !enraged) return;
-        coolDownCounter = settings.CoolDown;
+        coolDownCounter = CoolDown;
         //eating corpses
         if (amountToMegaChompCounter < amountToMegaChomp || (enraged &&enragedBiteCooldownTimer<=0)) //THIS IS SO UGLY
         {

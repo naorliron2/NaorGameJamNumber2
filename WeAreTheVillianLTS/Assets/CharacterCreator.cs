@@ -11,8 +11,7 @@ public class CharacterCreator : MonoBehaviour
 
     public void UpdateText()
     {
-        attackSkillName.text = skillUserScript.AttackSkill.settings.skillName;
-        attackSkillName.text = skillUserScript.AttackSkill.settings.skillName;
-        utilitySkillName.text = skillUserScript.UtilitySkill.settings.skillName;
+        attackSkillName.text = skillUserScript.AttackSkill.skillName;
+        utilitySkillName.text = skillUserScript.UtilitySkill.skillName;
     }
 }

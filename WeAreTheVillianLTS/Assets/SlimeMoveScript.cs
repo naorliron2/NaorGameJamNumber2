@@ -26,7 +26,7 @@ public class SlimeMoveScript : MonoBehaviour
         myDamagable = GetComponent<BaseDamagable>();
         myRenderer = GetComponentInChildren<SpriteRenderer>();
     }
-    
+
     private void CheckGrounded()
     {
         RaycastHit2D hit;
@@ -43,7 +43,7 @@ public class SlimeMoveScript : MonoBehaviour
     void Update()
     {
         CheckGrounded();
-        Debug.Log(sightChecker.PlayerInSight);
+
         if (!myDamagable.isDead && grounded && sightChecker.PlayerInSight)
         {
             if (tryMoveTimer > 0)

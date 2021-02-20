@@ -20,7 +20,7 @@ public class TeleportSkill : UtillitySkill
 
         if (coolDownCounter > 0) return;
 
-        coolDownCounter = settings.CoolDown;
+        coolDownCounter = CoolDown;
         Vector2 mousePositionWorldSpace = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -cam.transform.position.z));
 
         Vector2 playerToMouse = mousePositionWorldSpace - rb.position;

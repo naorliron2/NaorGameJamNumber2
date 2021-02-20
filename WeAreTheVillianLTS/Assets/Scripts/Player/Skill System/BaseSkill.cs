@@ -4,13 +4,14 @@ using UnityEngine;
 
 public abstract class BaseSkill : MonoBehaviour
 {
-    public SkillSettings settings;
+    public float CoolDown;
+    public string skillName;
 
-    [SerializeField]protected float coolDownCounter = 0;
+    protected float coolDownCounter = 0;
     public virtual void UseSkill()
     {
         if (coolDownCounter > 0) return;
-        coolDownCounter = settings.CoolDown;
+        coolDownCounter = CoolDown;
     }
     private void Update()
     {

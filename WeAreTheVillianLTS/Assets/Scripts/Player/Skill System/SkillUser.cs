@@ -17,16 +17,20 @@ public class SkillUser : MonoBehaviour
         UtilitySkills = GetComponents<UtillitySkill>();
         AttackSkills = GetComponents<AttackSkill>();
 
+        ChooseSkills();
+
+    }
+
+    public void ChooseSkills()
+    {
         AttackSkill = AttackSkills[Random.Range(0, AttackSkills.Length)];
         UtilitySkill = UtilitySkills[Random.Range(0, UtilitySkills.Length)];
-
-        Debug.Log(Random.Range(0, AttackSkills.Length));
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!Playbutton.GameStarted) { return; }
         if (Input.GetMouseButtonDown(0))
         {
             AttackSkill.UseSkill();

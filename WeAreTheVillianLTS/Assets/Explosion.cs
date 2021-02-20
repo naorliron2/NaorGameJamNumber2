@@ -22,6 +22,7 @@ public class Explosion : MonoBehaviour
 
         foreach (var col in hitObj)
         {
+
             if (col.TryGetComponent<PlayerHealth>(out PlayerHealth toDamage))
             {
                 Debug.Log(toDamage.gameObject.name);
