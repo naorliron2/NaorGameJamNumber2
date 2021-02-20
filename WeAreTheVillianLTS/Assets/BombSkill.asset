@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872eeca0ed8b97b41ba44b0408adee85, type: 3}
   m_Name: BombSkill
   m_EditorClassIdentifier: 
-  CoolDown: 0
+  CoolDown: 3
   skillName: BomberMan

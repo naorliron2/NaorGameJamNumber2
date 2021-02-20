@@ -6,6 +6,7 @@ public abstract class BaseDamagable : MonoBehaviour
 {
     public int health = 100;
     public int maxHealth = 100;
+    public bool isDead;
     public virtual void TakeDamage(int amount)
     {
         Debug.Log("Take Damage");
@@ -20,6 +21,12 @@ public abstract class BaseDamagable : MonoBehaviour
         if (amount <= 0) return;
         health += amount;
         health = health > maxHealth ? maxHealth : health;
+
+    }
+    private void Update()
+    {
+
+        isDead = health <= 0;
 
     }
     protected abstract void Die();

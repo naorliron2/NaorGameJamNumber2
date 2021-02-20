@@ -17,7 +17,7 @@ public class Explosion : MonoBehaviour
     {
         Collider2D[] hitObj = Physics2D.OverlapCircleAll(transform.position, explosionSize, layersToHit);
         GameObject instace = Instantiate(explostionGraphics, transform.position, Quaternion.identity);
-        instace.transform.localScale = new Vector3(explosionSize, explosionSize, 1);
+        instace.transform.localScale = new Vector3(explosionSize * 10, explosionSize * 10, 1);
 
         foreach (var col in hitObj)
         {
