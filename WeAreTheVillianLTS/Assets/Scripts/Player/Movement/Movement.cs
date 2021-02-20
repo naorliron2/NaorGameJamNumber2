@@ -5,13 +5,18 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody2D rb;
+
+    [SerializeField] LayerMask groundCheckMask;
+    [SerializeField] SpriteRenderer _sprite;
+    [SerializeField] Animator _animator;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] float gravity;
 
     Vector2 velocity;
-    bool grounded=false;
+    bool grounded = true;
+    bool pointsRight = false;
 
     InputData currentFrameInputs;
 
@@ -21,7 +26,7 @@ public class Movement : MonoBehaviour
         public Vector2 inputDir;
         public bool space;
         public bool shift;
-        
+
     }
 
     InputData GetInputs()
@@ -53,6 +58,8 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
+        CheckGrounded();
+
         currentFrameInputs = GetInputs();
 
         float speed = currentFrameInputs.shift ? runSpeed : walkSpeed;
@@ -65,16 +72,54 @@ public class Movement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         rb.velocity = velocity;
-        
+
+        HandleAnimations();
+        HandleFlip();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void CheckGrounded()
     {
-        grounded = true;
+        RaycastHit2D hit;
+        if (hit = Physics2D.Raycast(transform.position, -Vector2.up, 0.1f, groundCheckMask))
+        {
+            grounded = true;           
+        }
+        else
+        {
+             grounded = false;
+        }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void HandleAnimations()
     {
-        grounded = false;
+        if (grounded == false)
+        {
+            _animator.SetBool("Jump", true);
+            _animator.SetBool("Walk", false);
+        }
+        else if (velocity.x > 0.1f || velocity.x < -0.1f)
+        {
+            _animator.SetBool("Jump", false);
+            _animator.SetBool("Walk", true);
+        }
+        else
+        {
+            _animator.SetBool("Jump", false);
+            _animator.SetBool("Walk", false);
+        }
+    }
+
+    private void HandleFlip()
+    {
+        if (currentFrameInputs.inputDir.x > 0)
+        {
+            pointsRight = true;
+        }
+        else if (currentFrameInputs.inputDir.x < 0)
+        {
+            pointsRight = false;
+        }
+        _sprite.flipX = pointsRight;
+
     }
 }
