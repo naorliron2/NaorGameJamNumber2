@@ -224,8 +224,9 @@ MonoBehaviour:
   coolDownCounter: 0
   bombPrefab: {fileID: 6307689255642901662, guid: d6454681591d54a40a1615b3cf0352f6,
     type: 3}
-  throwForce: 5
-  damage: 20
+  throwForce: 6
+  throwTorque: -0.4
+  damage: 40
 --- !u!114 &1170427692
 MonoBehaviour:
   m_ObjectHideFlags: 0
