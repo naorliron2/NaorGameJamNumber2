@@ -11,7 +11,7 @@ public class BombSkill : AttackSkill
     {
         if (coolDownCounter > 0) return;
         coolDownCounter = settings.CoolDown;
-        GameObject instance = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+        GameObject instance = Instantiate(bombPrefab, transform.position + new Vector3(0,0.5f,0), Quaternion.identity);
         Rigidbody2D instanceRB = instance.GetComponent<Rigidbody2D>();
         Explosion explodeScipt = instance.GetComponent<Explosion>();
         explodeScipt.damage = damage;

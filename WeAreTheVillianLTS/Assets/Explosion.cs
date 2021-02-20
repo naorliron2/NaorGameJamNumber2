@@ -10,6 +10,7 @@ public class Explosion : MonoBehaviour
     public int damage;
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         Explode();
     }
 
